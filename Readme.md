@@ -28,12 +28,12 @@ This case study involves designing and implementing a microservices-based archit
 
 - Java for developing the microservices
 - Spring Boot for creating standalone, production-grade Spring applications
-- Spring Cloud for building a resilient and scalable microservices architecture
-- Eureka for service discovery
-- Spring Cloud Gateway for routing and load balancing
+- MySQL for data storage
 - Feign for declarative REST client and synchronous HTTP communication
 - RabbitMQ for asynchronous communication between services
-- MySQL for data storage
+- Spring Cloud for building a resilient and scalable microservices architecture
+- Spring Cloud Gateway for routing and load balancing
+- Eureka for service discovery
 - Docker for containerization
 - Kubernetes for orchestration and managing the deployment
 
