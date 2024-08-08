@@ -31,7 +31,7 @@ import java.time.LocalDateTime;
 public class Patient {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
     private String fullName;
     private String email;
