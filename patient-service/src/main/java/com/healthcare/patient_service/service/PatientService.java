@@ -1,4 +1,4 @@
-package com.healthcare.patient_service;
+package com.healthcare.patient_service.service;
 
 import com.healthcare.patient_service.domain.Patient;
 
