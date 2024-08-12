@@ -3,7 +3,6 @@ package com.healthcare.patient_service.service;
 import com.healthcare.patient_service.domain.Patient;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface PatientService {
 
@@ -15,7 +14,7 @@ public interface PatientService {
 
     void deletePatient(long id);
 
-    Optional<Patient> searchByEmail(String email);
+    Patient searchByEmail(String email);
 
     Patient searchByPhone(String phone);
 

@@ -1,16 +1,22 @@
 package com.healthcare.patient_service.service;
 
 import com.healthcare.patient_service.domain.Patient;
+import com.healthcare.patient_service.exceptions.DuplicatePatientException;
+import com.healthcare.patient_service.exceptions.PatientNotFoundException;
 import com.healthcare.patient_service.repository.PatientRepository;
 import lombok.extern.slf4j.Slf4j;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Slf4j
 public class PatientServiceImpl implements PatientService {
+
+//    Alternative to using lombok's @Slf4j annotation
+//    private Logger log = LoggerFactory.getLogger(PatientServiceImpl.class);
 
     private final PatientRepository patientRepository;
 
@@ -22,12 +28,13 @@ public class PatientServiceImpl implements PatientService {
     public Patient createPatient(Patient patient) {
         log.debug("Creating patient: {}", patient);
         patientRepository
-                .findByEmailOrPhone(patient.getEmail(), patient.getPhone())
-                .ifPresent(p -> {
-                    log.error("Patient already exists with email: {} or phone: {}", p.getEmail(), p.getPhone());
-                    throw new RuntimeException("Patient already exists with email: " +
-                            p.getEmail() + " or phone: " + p.getPhone());
-                });
+        .findByEmailOrPhone(patient.getEmail(), patient.getPhone())
+        .ifPresent(existingPatient -> {
+            log.error("Patient already exists with email: {} or phone: {}",
+                    existingPatient.getEmail(), existingPatient.getPhone());
+            throw new DuplicatePatientException("Patient already exists with email: " +
+                    existingPatient.getEmail() + " or phone: " + existingPatient.getPhone());
+        });
         log.debug("Patient does not exist with email: {} or phone: {}", patient.getEmail(), patient.getPhone());
         return patientRepository.save(patient);
     }
@@ -36,7 +43,7 @@ public class PatientServiceImpl implements PatientService {
     public Patient getPatient(long id) {
         log.debug("Getting patient, id: {}", id);
         return patientRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Patient not found, id: " + id));
+                .orElseThrow(() -> new PatientNotFoundException("Patient not found, id: " + id));
     }
 
     @Override
@@ -48,20 +55,26 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public void deletePatient(long id) {
         log.debug("Deleting patient, id: {}", id);
-        patientRepository.deleteById(id);
+        var patient = patientRepository
+                .findById(id)
+                .orElseThrow(() -> new PatientNotFoundException("Patient not found, cannot delete, id: " + id));
+        patientRepository.delete(patient);
     }
 
     @Override
-    public Optional<Patient> searchByEmail(String email) {
+    public Patient searchByEmail(String email) {
         log.debug("Searching patient by email: {}", email);
-        return patientRepository.searchByEmail(email);
+        return patientRepository.findByEmail(email)
+                .orElseThrow(() ->
+                    new PatientNotFoundException("Patient not found, email: " + email));
     }
 
     @Override
     public Patient searchByPhone(String phone) {
         log.debug("Searching patient by phone: {}", phone);
         return patientRepository.findByPhone(phone)
-                .orElseThrow(() -> new RuntimeException("Patient not found, phone: " + phone));
+                .orElseThrow(() ->
+                    new PatientNotFoundException("Patient not found, phone: " + phone));
     }
 
     @Override

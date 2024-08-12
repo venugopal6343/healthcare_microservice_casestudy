@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public record PatientDto(
         long id,
@@ -20,13 +21,15 @@ public record PatientDto(
         String email,
 
         @NotEmpty(message = "Phone is required")
-        @Pattern(regexp = "^(\\+\\d{1,3}[- ]?)?\\d{10}$", message = "Phone is invalid")
+        @Pattern(regexp = "^\\d{10}$", message = "Phone is invalid")
         String phone,
 
         @NotEmpty(message = "Address is required")
         String address,
 
         @Past(message = "Date of birth must be in the past")
-        LocalDate dob
+        LocalDate dob,
+
+        List<String> illnesses
 ) {
 }
