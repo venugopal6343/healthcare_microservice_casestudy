@@ -1,6 +1,6 @@
 package com.healthcare.appointment_service.dto;
 
-public record Doctor(
-        String id, String name
-) {
-}
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public record Doctor(String id, String fullName) { }

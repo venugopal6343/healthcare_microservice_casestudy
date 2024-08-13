@@ -9,15 +9,36 @@ server:
   port: 8300
 logging:
   level:
-    #    root: WARN
+    io:
+      github:
+        openfeign: DEBUG
+    feign:
+      client:
+        config:
+          Default: DEBUG
+          default:
+            loggerLevel: DEBUG
+    com:
+      healthcare:
+        appointment:
+          service:
+            AppointmentServiceApplication: DEBUG
+            controller:
+              AppointmentController: DEBUG
+            repository:
+              AppointmentRepository: DEBUG
+            service:
+              AppointmentService: DEBUG
     org:
       mongodb:
         driver: DEBUG
       springframework:
-        #        web: WARN
+        cloud:
+          openfeign:
+              FeignClient: DEBUG
         data:
           core:
             MongoTemplate: DEBUG
             MongoOperations: DEBUG
-  pattern:
-    console: "%msg%n"
+#  pattern:
+#    console: "%msg%n"

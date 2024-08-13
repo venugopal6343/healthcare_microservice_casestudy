@@ -48,4 +48,18 @@ public class Appointment {
 
     private String status;
 
+    public Appointment(String appointmentDate, String appointmentTime, long patientId, String patientName, String patientNumber, String doctorId, String doctorName, String status) {
+        this.appointmentDate = appointmentDate;
+        this.appointmentTime = appointmentTime;
+        this.patientId = patientId;
+        this.patientName = patientName;
+        this.patientNumber = patientNumber;
+        this.doctorId = doctorId;
+        this.doctorName = doctorName;
+        this.status = status;
+    }
+
+    public void toDto() {
+
+    }
 }

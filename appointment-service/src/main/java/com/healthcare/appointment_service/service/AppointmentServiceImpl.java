@@ -3,6 +3,8 @@ package com.healthcare.appointment_service.service;
 import com.healthcare.appointment_service.domain.Appointment;
 import com.healthcare.appointment_service.dto.Doctor;
 import com.healthcare.appointment_service.dto.Patient;
+import com.healthcare.appointment_service.feign_clients.DoctorServiceClient;
+import com.healthcare.appointment_service.feign_clients.PatientServiceClient;
 import com.healthcare.appointment_service.repository.AppointmentRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +14,13 @@ import java.util.List;
 public class AppointmentServiceImpl implements AppointmentService {
 
     private final AppointmentRepository appointmentRepository;
+    private final DoctorServiceClient doctorServiceClient;
+    private final PatientServiceClient patientServiceClient;
 
-    public AppointmentServiceImpl(AppointmentRepository appointmentRepository) {
+    public AppointmentServiceImpl(AppointmentRepository appointmentRepository, DoctorServiceClient doctorServiceClient, PatientServiceClient patientServiceClient) {
         this.appointmentRepository = appointmentRepository;
+        this.doctorServiceClient = doctorServiceClient;
+        this.patientServiceClient = patientServiceClient;
     }
 
     @Override
@@ -45,11 +51,11 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public Patient getPatientById(String patientId) {
-        return null;
+        return patientServiceClient.getPatientById(Long.parseLong(patientId));
     }
 
     @Override
     public Doctor getDoctorById(String doctorId) {
-        return null;
+        return doctorServiceClient.getDoctorById(doctorId);
     }
 }
