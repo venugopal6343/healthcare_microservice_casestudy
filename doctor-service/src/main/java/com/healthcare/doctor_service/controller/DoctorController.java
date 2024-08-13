@@ -24,6 +24,12 @@ public class DoctorController {
         return ResponseEntity.status(HttpStatus.CREATED).body(DoctorDto.fromEntity(doctor));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DoctorDto> getDoctor(@PathVariable String id) {
+        var doctor = doctorService.getDoctor(id).orElseThrow();
+        return ResponseEntity.ok(DoctorDto.fromEntity(doctor));
+    }
+
     @GetMapping
     public ResponseEntity<List<DoctorDto>> getAllDoctors() {
         var doctors = doctorService.getAllDoctors();

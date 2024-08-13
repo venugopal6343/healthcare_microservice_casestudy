@@ -1,26 +1,23 @@
 spring:
   application:
-    name: doctor-service
+    name: appointment-service
   data:
     mongodb:
       uri: mongodb+srv://ashishspanicker:6gJWuGgzQ7s8hR4c@cluster0.pb6vbbj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-      database: doctor_service
-#      username: ashishspanicker
-#      password: 6gJWuGgzQ7s8hR4c
+      database: appointment_service
 server:
-  port: 8200
+  port: 8300
 logging:
   level:
-#    root: WARN
+    #    root: WARN
     org:
       mongodb:
         driver: DEBUG
       springframework:
-#        web: WARN
+        #        web: WARN
         data:
-            core:
-              MongoTemplate: DEBUG
-              MongoOperations: DEBUG
+          core:
+            MongoTemplate: DEBUG
+            MongoOperations: DEBUG
   pattern:
     console: "%msg%n"
-
