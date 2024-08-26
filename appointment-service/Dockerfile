@@ -1,6 +1,6 @@
 # layer 1
 # Use maven image to build the project
-FROM maven:latest as build
+FROM maven:latest AS build
 WORKDIR /app
 COPY pom.xml .
 COPY src ./src
@@ -10,6 +10,7 @@ RUN mvn clean package -DskipTests
 # Use eclipse-temurin image to extract the jar file
 FROM eclipse-temurin:21-jre-alpine as builder
 WORKDIR extracted
+COPY --from=build /app/target/*.jar app.jar
 ADD target/*.jar app.jar
 RUN java -Djarmode=layertools -jar app.jar extract
 
