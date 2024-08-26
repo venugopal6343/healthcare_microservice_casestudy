@@ -11,7 +11,7 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:21-jre-alpine as builder
 COPY --from=build /app/target/*.jar app.jar
 WORKDIR extracted
-ADD target/*.jar app.jar
+#ADD target/*.jar app.jar
 RUN java -Djarmode=layertools -jar app.jar extract
 
 # layer 3
