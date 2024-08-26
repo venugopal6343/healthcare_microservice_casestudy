@@ -27,3 +27,35 @@ services:
     networks:
       - mysql
     restart: always
+  patient_service:
+    build: ./patient_service
+    container_name: patient_service
+    ports:
+      - "8100:8100"
+    depends_on:
+      - mysql
+    networks:
+      - mysql
+    restart: always
+  doctor_service:
+    build: ./doctor_service
+    container_name: doctor_service
+    ports:
+      - "8200:8200"
+    depends_on:
+      - mongo
+    networks:
+      - mongo
+    restart: always
+  appointment_service:
+    build: ./appointment_service
+    container_name: appointment_service
+    ports:
+      - "8300:8300"
+    depends_on:
+      - mysql
+      - mongo
+    networks:
+      - mysql
+      - mongo
+    restart: always
