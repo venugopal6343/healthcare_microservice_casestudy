@@ -38,3 +38,7 @@ logging:
               BasicBinder: TRACE
   pattern:
     console: "%msg%n"
+  eureka:
+    client:
+      serviceUrl:
+        defaultZone: http://localhost:8761/eureka/
