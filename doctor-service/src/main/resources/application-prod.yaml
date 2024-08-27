@@ -1,0 +1,9 @@
+app:
+  name: Doctor Service
+  version: 1.0.0
+  description: Doctor Service
+  base-url: /api/v1/doctor
+spring:
+  data:
+    mongodb:
+      uri: mongodb://mongo:27017/doctor-service

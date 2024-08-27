@@ -18,8 +18,8 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: test
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: patient_service
       MYSQL_USER: test
       MYSQL_PASSWORD: test
     volumes:
@@ -30,6 +30,8 @@ services:
   patient_service:
     build: ./patient-service
     container_name: patient-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
     ports:
       - "8100:8100"
     depends_on:
@@ -40,6 +42,8 @@ services:
   doctor_service:
     build: ./doctor-service
     container_name: doctor-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
     ports:
       - "8200:8200"
     depends_on:
@@ -50,6 +54,8 @@ services:
   appointment_service:
     build: ./appointment-service
     container_name: appointment-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
     ports:
       - "8300:8300"
     depends_on:

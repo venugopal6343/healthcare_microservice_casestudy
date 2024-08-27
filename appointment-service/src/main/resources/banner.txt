@@ -1,0 +1,1 @@
+${app.name} - ${app.version} - ${app.base-url}
