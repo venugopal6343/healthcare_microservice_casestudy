@@ -10,6 +10,7 @@ FROM eclipse-temurin:21-jre-alpine AS builder
 WORKDIR extracted
 COPY --from=build /app/target/*.jar app.jar
 RUN java -Djarmode=tools -jar app.jar extract --layers --destination .
+RUN ls -la
 
 # Use eclipse-temurin image to run the application
 FROM eclipse-temurin:21-jre-alpine

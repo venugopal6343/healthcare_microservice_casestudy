@@ -27,30 +27,30 @@ services:
     networks:
       - mysql
     restart: always
-  patient_service:
-    build: ./patient-service
-    container_name: patient-service
-    environment:
-      - SPRING_PROFILES_ACTIVE=prod
-    ports:
-      - "8100:8100"
-    depends_on:
-      - mysql
-    networks:
-      - mysql
-    restart: always
-  doctor_service:
-    build: ./doctor-service
-    container_name: doctor-service
-    environment:
-      - SPRING_PROFILES_ACTIVE=prod
-    ports:
-      - "8200:8200"
-    depends_on:
-      - mongo
-    networks:
-      - mongo
-    restart: always
+#  patient_service:
+#    build: ./patient-service
+#    container_name: patient-service
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=prod
+#    ports:
+#      - "8100:8100"
+#    depends_on:
+#      - mysql
+#    networks:
+#      - mysql
+#    restart: always
+#  doctor_service:
+#    build: ./doctor-service
+#    container_name: doctor-service
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=prod
+#    ports:
+#      - "8200:8200"
+#    depends_on:
+#      - mongo
+#    networks:
+#      - mongo
+#    restart: always
   appointment_service:
     build: ./appointment-service
     container_name: appointment-service
