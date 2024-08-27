@@ -9,3 +9,7 @@ spring:
       uri: mongodb://mongo:27017/appointment_service
 server:
     port: 8300
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka:8761/eureka/

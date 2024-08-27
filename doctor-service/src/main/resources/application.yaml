@@ -8,7 +8,7 @@ spring:
 #      username: ashishspanicker
 #      password: 6gJWuGgzQ7s8hR4c
 server:
-  port: 7200
+  port: 8200
 logging:
   level:
 #    root: WARN
@@ -23,11 +23,4 @@ logging:
               MongoOperations: DEBUG
   pattern:
     console: "%msg%n"
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
-  instance:
-    preferIpAddress: true
 

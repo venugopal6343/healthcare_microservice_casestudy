@@ -17,3 +17,7 @@ spring:
     properties:
       hibernate:
         format_sql: true # Set to true to format the SQL queries
+eureka:
+  client:
+    service-url:
+        defaultZone: http://eureka:8761/eureka/

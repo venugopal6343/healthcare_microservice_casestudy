@@ -6,7 +6,7 @@ spring:
       uri: mongodb+srv://ashishspanicker:6gJWuGgzQ7s8hR4c@cluster0.pb6vbbj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
       database: appointment_service
 server:
-  port: 7300
+  port: 8300
 logging:
   level:
     io:
@@ -42,9 +42,3 @@ logging:
             MongoOperations: DEBUG
 #  pattern:
 #    console: "%msg%n"
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
-  instance:
-    preferIpAddress: true
