@@ -9,7 +9,7 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:21-jre-alpine as builder
 WORKDIR extracted
 COPY --from=build /app/target/*.jar app.jar
-RUN java -Djarmode=layertools -jar app.jar extract
+RUN java -Djarmode=tools  -jar app.jar extract --layers --launcher # changed
 
 # Use eclipse-temurin image to run the application
 FROM eclipse-temurin:21-jre-alpine
