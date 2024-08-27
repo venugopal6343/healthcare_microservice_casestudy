@@ -8,7 +8,7 @@ RUN mvn clean package -DskipTests
 
 # layer 2
 # Use eclipse-temurin image to extract the jar file
-FROM eclipse-temurin:21-jre-alpine as builder
+FROM eclipse-temurin:21-jre-alpine AS builder
 WORKDIR extracted
 COPY --from=build /app/target/*.jar app.jar
 RUN java -Djarmode=tools  -jar app.jar extract --layers --launcher # changed
@@ -17,9 +17,9 @@ RUN java -Djarmode=tools  -jar app.jar extract --layers --launcher # changed
 # Use eclipse-temurin image to run the application
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR application
-COPY --from=builder extracted/dependencies/ ./
-COPY --from=builder extracted/spring-boot-loader/ ./
-COPY --from=builder extracted/snapshot-dependencies/ ./
-COPY --from=builder extracted/application/ ./
+COPY --from=builder extracted/app/dependencies/ ./
+COPY --from=builder extracted/app/spring-boot-loader/ ./
+COPY --from=builder extracted/app/snapshot-dependencies/ ./
+COPY --from=builder extracted/app/application/ ./
 EXPOSE 8200
 ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
